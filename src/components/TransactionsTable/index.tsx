@@ -7,7 +7,7 @@ export interface Transaction {
   id: number,
   title: string,
   amount: number,
-  type: string,
+  transactionType: string,
   category: string,
   createdAt: Date
 }
@@ -17,7 +17,7 @@ export function TransactionTable() {
 
   useEffect(() => {
     api.get('transactions')
-      .then(({ data }) => setTransactions(data))
+      .then(({ data }) => setTransactions(data.transactions))
   }, [])
 
   return (

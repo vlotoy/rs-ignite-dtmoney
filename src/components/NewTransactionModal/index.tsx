@@ -1,5 +1,6 @@
 import { FormEvent, useState } from 'react';
 import Modal from 'react-modal';
+import { api } from '../../services/api';
 
 import { Container, RadioBox, TransactionTypeContainer } from './styles';
 
@@ -23,6 +24,17 @@ export function NewTransactionModal({
 
   function handleCreateNewTransaction(event: FormEvent) {
     event.preventDefault()
+
+    const data = {
+      title,
+      amount,
+      category,
+      transactionType
+    }
+
+    api.post('/transactions', data)
+    api.get('transactions')
+
   }
 
   return (
@@ -43,9 +55,23 @@ export function NewTransactionModal({
       <Container onSubmit={handleCreateNewTransaction}>
         <h2>Cadastrar Operação</h2>
 
-        <input type="text" name="title" id="title" placeholder="Título"/>
+        <input 
+          type="text" 
+          name="title" 
+          id="title" 
+          placeholder="Título"
+          value={title}
+          onChange={event => setTitle(event.target.value)}
+        />
 
-        <input type="number" name="amount" id="amount" placeholder="Valor"/>
+        <input 
+          type="number" 
+          name="amount" 
+          id="amount" 
+          placeholder="Valor"
+          value={amount}
+          onChange={event => setAmount(Number(event.target.value))}
+        />
 
         <TransactionTypeContainer>
           <RadioBox
@@ -69,7 +95,14 @@ export function NewTransactionModal({
           </RadioBox>
         </TransactionTypeContainer>
 
-        <input type="text" name="category" id="category" placeholder="Categoria"/>
+        <input 
+          type="text" 
+          name="category" 
+          id="category" 
+          placeholder="Categoria"
+          value={category}
+          onChange={event => setCategory(event.target.value)}
+        />
 
         <button type="submit">Cadastrar</button>
       </Container>

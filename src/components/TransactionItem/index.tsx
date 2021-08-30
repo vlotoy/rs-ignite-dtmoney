@@ -1,4 +1,4 @@
-import { Transaction } from '../TransactionsTable';
+import { Transaction } from '../../TransactionsContext';
 
 interface TransactionItemProps {
   transaction: Transaction

@@ -1,4 +1,4 @@
-import { Transaction } from '../../TransactionsContext';
+import { Transaction } from '../../hooks/useTransactions';
 
 interface TransactionItemProps {
   transaction: Transaction
